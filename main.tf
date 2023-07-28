@@ -10,12 +10,14 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-west-2"
+  #shared_config_file      = "%UserProfile%/.aws/config"
+  region = "eu-central-1"
+  shared_credentials_file = "%UserProfile%/.aws/credentials"
 }
 
 module "compute" {
   source               = "./module/compute"
-  ami                  = "ami-0d70546e43a941d70"
+  ami                  = "ami-04e601abe3e1a910f"
   instance_type        = "t2.micro"
   tag_name             = "ExampleAppServerInstance"
   sg                   = module.security.webserver_sg
@@ -39,8 +41,8 @@ module "iam" {
 }
 module "s3" {
   source        = "./module/s3"
-  bucket_name   = "devinslevelupintechbucket0223"
+  bucket_name   = "yerlanbaidaliyev28072023"
   acl           = "private"
   object_key    = "LUIT"
-  object_source = "/dev/null"
+  object_source = "%UserProfile%/file-for-upload.txt"
 }
