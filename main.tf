@@ -9,6 +9,13 @@ terraform {
   required_version = ">= 0.14.9"
 }
 
+
+#resource "local_file" "sessionforxshell" {
+#  content = module.local_file.file_base64
+#  filename = "%UserProfile%/Documents/NetSarang Computer/7/Xshell/Sessions/devops/a.xsh"
+
+#}
+
 provider "aws" {
   #shared_config_file      = "%UserProfile%/.aws/config"
   region = "eu-central-1"
@@ -46,3 +53,7 @@ module "s3" {
   object_key    = "LUIT"
   object_source = "%UserProfile%/file-for-upload.txt"
 }
+
+#module "local_file" {
+#  source        = "./module/local_file"
+#}
