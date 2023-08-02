@@ -9,18 +9,13 @@ terraform {
   required_version = ">= 0.14.9"
 }
 
-
-#resource "local_file" "sessionforxshell" {
-#  content = module.local_file.file_base64
-#  filename = "%UserProfile%/Documents/NetSarang Computer/7/Xshell/Sessions/devops/a.xsh"
-
-#}
-
 provider "aws" {
   #shared_config_file      = "%UserProfile%/.aws/config"
-  region = "eu-central-1"
+  region                  = "eu-central-1"
   shared_credentials_file = "%UserProfile%/.aws/credentials"
 }
+
+provider "local" {}
 
 module "compute" {
   source               = "./module/compute"
@@ -54,6 +49,9 @@ module "s3" {
   object_source = "%UserProfile%/file-for-upload.txt"
 }
 
-#module "local_file" {
-#  source        = "./module/local_file"
-#}
+
+module "local_file" {
+  source              = "./module/local_file"
+  input_file_template = "./xshel-session-template"
+  file_path    = "%UserProfile%/Documents/NetSarang Computer/7/Xshell/Sessions/devops/${module.compute.ec2_name}.xsh"
+}

@@ -1,5 +1,9 @@
 #---- modules/localfile/variables.tf
 
-variable "binary_data" {
-  type = string
+variable "input_file_template" {
+  default = ""
+}
+
+variable "file_path" {
+  default = ""
 }
